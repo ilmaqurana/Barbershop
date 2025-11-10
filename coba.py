@@ -76,10 +76,13 @@ def load_data_from_google():
 
         # Gabungkan kolom penilaian pelayanan (rating)
         rating_cols = [col for col in df_form.columns if "penilaian pelayanan" in col]
-        df_form["rating"] = df_form[rating_cols].mean(axis=1)
+        if rating_cols:
+            df_form["rating"] = df_form[rating_cols].mean(axis=1)
+        else:
+            df_form["rating"] = 0
 
         # Pastikan tanggal ada
-        df_form["tanggal"] = pd.to_datetime(df_form["tanggal"], errors='coerce').dt.date
+        df_form["tanggal"] = pd.to_datetime(df_form["tanggal"], errors='coerce')
         df_form["id_transaksi"] = [f"R{i+1:03d}" for i in range(len(df_form))]
 
         df_form = df_form[["id_transaksi", "tanggal", "nama_pelanggan", "rating"]]
@@ -136,26 +139,22 @@ if menu == "Pendapatan & Kepuasan Harian":
         st.pyplot(fig)
 
     # --- Grafik Kepuasan ---
-if not data_form.empty:
-    # Pastikan kolom 'tanggal' bertipe datetime
-    data_form['tanggal'] = pd.to_datetime(data_form['tanggal'], errors='coerce')
-    
-    # Hitung rata-rata rating per tanggal
-    kepuasan_harian = data_form.groupby('tanggal')['rating'].mean().reset_index()
+    if not data_form.empty:
+        data_form['tanggal'] = pd.to_datetime(data_form['tanggal'], errors='coerce')
+        kepuasan_harian = data_form.groupby('tanggal')['rating'].mean().reset_index()
 
-    st.write("### 😊 Grafik Kepuasan Pelanggan (Google Form)")
-    fig2, ax2 = plt.subplots(figsize=(10, 5))
-    ax2.plot(kepuasan_harian['tanggal'], kepuasan_harian['rating'], marker="s", color="green")
-    ax2.set_title("Rata-rata Kepuasan Pelanggan (1-5)")
-    ax2.set_xlabel("Tanggal Pengisian Form")
-    ax2.set_ylabel("Rating")
-    ax2.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b'))
-    plt.xticks(rotation=45)
-    plt.grid(True, linestyle="--", alpha=0.5)
-    st.pyplot(fig2)
-else:
-    st.info("ℹ️ Data kepuasan pelanggan belum tersedia dari Google Form.")
-
+        st.write("### 😊 Grafik Kepuasan Pelanggan (Google Form)")
+        fig2, ax2 = plt.subplots(figsize=(10, 5))
+        ax2.plot(kepuasan_harian['tanggal'], kepuasan_harian['rating'], marker="s", color="green")
+        ax2.set_title("Rata-rata Kepuasan Pelanggan (1-5)")
+        ax2.set_xlabel("Tanggal Pengisian Form")
+        ax2.set_ylabel("Rating")
+        ax2.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b'))
+        plt.xticks(rotation=45)
+        plt.grid(True, linestyle="--", alpha=0.5)
+        st.pyplot(fig2)
+    else:
+        st.info("ℹ️ Data kepuasan pelanggan belum tersedia dari Google Form.")
 
     # --- Prediksi Pendapatan AI ---
     if not data_tx.empty and len(data_tx) > 2:
@@ -215,5 +214,3 @@ elif menu == "Input Transaksi Kasir":
         transaksi = pd.concat([transaksi, new_data], ignore_index=True)
         transaksi.to_csv(LOCAL_TX_FILE, index=False)
         st.success("✅ Transaksi berhasil disimpan tanpa rating (rating diambil dari Google Form).")
-        
-
