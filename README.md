@@ -1,1 +1,9 @@
-# Barbershop
+# Barbershoppandas
+
+streamlit
+
+prophet
+
+mlxtend
+
+reportlab
