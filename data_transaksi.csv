@@ -1,0 +1,7 @@
+tanggal,nama pelanggan,jenis kelamin,tanggal transaksi,layanan yang dipilih,column 6,rating kepuasan,id_transaksi,nama_pelanggan,layanan,harga,rating
+,,,,,,,T001,,,,
+,,,,,,22/09/2025 12:20:22,T002,,,,
+2025-10-31,Adi,Laki-Laki,01/11/2025,"Cukur Jenggot, Cat Rambut",60000.0,3,T003,,,,
+2025-10-31,putri,Perempuan,31/10/2025,"Hair Spa, Cat Rambut, Creambath",150000.0,3,T004,,,,
+2025-11-03,,,,,,,T005,putri,"Creambath, Cat Rambut, Hair Spa, Potong Rambut",115000.0,5.0
+2025-11-03,,,,,,,T006,surya,"Cukur Jenggot, Cat Rambut, Potong Rambut",75000.0,

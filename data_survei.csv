@@ -1,0 +1,101 @@
+id_survei,id_transaksi,kepuasan_layanan,kebersihan_tempat,keramahan_karyawan,komentar
+S001,T001,5,5,4,"Agak lama nunggu, tapi hasilnya bagus."
+S002,T002,4,4,3,Karyawannya sopan dan teliti.
+S003,T003,4,4,3,Pelayanannya ramah banget!
+S004,T004,4,5,5,Tempatnya bersih dan nyaman.
+S005,T005,3,5,3,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S006,T006,4,3,4,Tempatnya bersih dan nyaman.
+S007,T007,3,4,4,"Hasil potongannya rapi, suka banget!"
+S008,T008,4,5,5,Karyawannya sopan dan teliti.
+S009,T009,5,5,5,Pelayanannya ramah banget!
+S010,T010,5,5,4,Tempatnya bersih dan nyaman.
+S011,T011,3,4,3,Tempatnya bersih dan nyaman.
+S012,T012,5,5,3,Karyawannya sopan dan teliti.
+S013,T013,4,5,3,Musik di dalam barbershop enak didengar.
+S014,T014,3,5,5,Karyawannya sopan dan teliti.
+S015,T015,5,4,4,Pelayanannya ramah banget!
+S016,T016,3,5,4,Karyawannya sopan dan teliti.
+S017,T017,3,3,4,"Hasil potongannya rapi, suka banget!"
+S018,T018,5,4,3,Akan datang lagi minggu depan.
+S019,T019,5,5,4,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S020,T020,3,3,3,"Hasil potongannya rapi, suka banget!"
+S021,T021,5,3,4,"Mantap, recommended banget!"
+S022,T022,5,3,4,"Hasil potongannya rapi, suka banget!"
+S023,T023,3,4,4,Pelayanannya ramah banget!
+S024,T024,4,3,5,"Agak lama nunggu, tapi hasilnya bagus."
+S025,T025,5,3,4,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S026,T026,4,5,5,"Hasil potongannya rapi, suka banget!"
+S027,T027,3,3,3,Harga sesuai dengan kualitas.
+S028,T028,3,3,5,Musik di dalam barbershop enak didengar.
+S029,T029,4,5,5,"Agak lama nunggu, tapi hasilnya bagus."
+S030,T030,4,3,5,Tempatnya bersih dan nyaman.
+S031,T031,4,3,4,"Agak lama nunggu, tapi hasilnya bagus."
+S032,T032,3,4,4,Karyawannya sopan dan teliti.
+S033,T033,3,3,3,"Agak lama nunggu, tapi hasilnya bagus."
+S034,T034,4,4,4,Tempatnya bersih dan nyaman.
+S035,T035,4,4,5,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S036,T036,4,5,5,Musik di dalam barbershop enak didengar.
+S037,T037,3,3,4,"Hasil potongannya rapi, suka banget!"
+S038,T038,5,4,3,Tempatnya bersih dan nyaman.
+S039,T039,5,4,4,Musik di dalam barbershop enak didengar.
+S040,T040,4,5,5,Tempatnya bersih dan nyaman.
+S041,T041,4,5,3,Karyawannya sopan dan teliti.
+S042,T042,3,5,4,Pelayanannya ramah banget!
+S043,T043,5,5,5,"Agak lama nunggu, tapi hasilnya bagus."
+S044,T044,4,4,3,Musik di dalam barbershop enak didengar.
+S045,T045,5,4,5,Tempatnya bersih dan nyaman.
+S046,T046,5,4,5,Karyawannya sopan dan teliti.
+S047,T047,5,4,4,Harga sesuai dengan kualitas.
+S048,T048,5,4,5,"Hasil potongannya rapi, suka banget!"
+S049,T049,3,4,5,Harga sesuai dengan kualitas.
+S050,T050,5,5,3,"Mantap, recommended banget!"
+S051,T051,5,4,4,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S052,T052,3,4,4,"Agak lama nunggu, tapi hasilnya bagus."
+S053,T053,4,5,5,Musik di dalam barbershop enak didengar.
+S054,T054,4,4,4,"Agak lama nunggu, tapi hasilnya bagus."
+S055,T055,5,4,5,"Hasil potongannya rapi, suka banget!"
+S056,T056,5,3,4,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S057,T057,5,5,5,Musik di dalam barbershop enak didengar.
+S058,T058,3,3,5,Karyawannya sopan dan teliti.
+S059,T059,3,3,3,Pelayanannya ramah banget!
+S060,T060,3,3,4,"Mantap, recommended banget!"
+S061,T061,3,4,4,"Mantap, recommended banget!"
+S062,T062,3,5,5,Harga sesuai dengan kualitas.
+S063,T063,4,4,3,"Hasil potongannya rapi, suka banget!"
+S064,T064,5,5,3,Tempatnya bersih dan nyaman.
+S065,T065,4,3,3,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S066,T066,4,3,5,"Agak lama nunggu, tapi hasilnya bagus."
+S067,T067,3,4,3,Akan datang lagi minggu depan.
+S068,T068,5,5,5,"Mantap, recommended banget!"
+S069,T069,4,4,5,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S070,T070,4,5,4,"Hasil potongannya rapi, suka banget!"
+S071,T071,5,4,4,Karyawannya sopan dan teliti.
+S072,T072,3,5,4,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S073,T073,4,5,3,Karyawannya sopan dan teliti.
+S074,T074,4,3,5,Karyawannya sopan dan teliti.
+S075,T075,3,4,4,Musik di dalam barbershop enak didengar.
+S076,T076,5,3,3,"Hasil potongannya rapi, suka banget!"
+S077,T077,3,4,5,"Hasil potongannya rapi, suka banget!"
+S078,T078,5,3,3,Harga sesuai dengan kualitas.
+S079,T079,4,4,5,Akan datang lagi minggu depan.
+S080,T080,4,3,3,Harga sesuai dengan kualitas.
+S081,T081,4,5,5,Pelayanannya ramah banget!
+S082,T082,5,4,4,Pelayanannya ramah banget!
+S083,T083,4,4,4,Harga sesuai dengan kualitas.
+S084,T084,5,5,5,"Perlu ditambah kursi tunggu, agak penuh tadi."
+S085,T085,5,3,4,"Agak lama nunggu, tapi hasilnya bagus."
+S086,T086,4,4,4,Pelayanannya ramah banget!
+S087,T087,4,4,5,Harga sesuai dengan kualitas.
+S088,T088,5,3,4,"Hasil potongannya rapi, suka banget!"
+S089,T089,5,5,3,Harga sesuai dengan kualitas.
+S090,T090,5,5,5,Pelayanannya ramah banget!
+S091,T091,3,5,4,"Hasil potongannya rapi, suka banget!"
+S092,T092,4,3,3,Karyawannya sopan dan teliti.
+S093,T093,4,4,3,Akan datang lagi minggu depan.
+S094,T094,4,4,4,Karyawannya sopan dan teliti.
+S095,T095,4,4,3,Akan datang lagi minggu depan.
+S096,T096,3,5,5,Pelayanannya ramah banget!
+S097,T097,4,3,5,Tempatnya bersih dan nyaman.
+S098,T098,5,3,3,"Agak lama nunggu, tapi hasilnya bagus."
+S099,T099,3,3,5,"Hasil potongannya rapi, suka banget!"
+S100,T100,3,3,4,Tempatnya bersih dan nyaman.
