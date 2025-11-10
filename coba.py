@@ -1,9 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-from mlxtend.frequent_patterns import apriori, association_rules
-from mlxtend.preprocessing import TransactionEncoder
 from io import BytesIO
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4, landscape
@@ -92,6 +89,23 @@ def load_data_from_google():
         st.error(f"Gagal memuat data dari Google Form: {e}")
         return pd.DataFrame()
 
+# === Fungsi plotting grafik kepuasan ===
+def plot_kepuasan(df_form):
+    if not df_form.empty:
+        df_form['tanggal'] = pd.to_datetime(df_form['tanggal'], errors='coerce')
+        kepuasan_harian = df_form.groupby('tanggal')['rating'].mean().reset_index()
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.plot(kepuasan_harian['tanggal'], kepuasan_harian['rating'], marker="s", color="green")
+        ax.set_title("Rata-rata Kepuasan Pelanggan (1-5)")
+        ax.set_xlabel("Tanggal Pengisian Form")
+        ax.set_ylabel("Rating")
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b'))
+        plt.xticks(rotation=45)
+        plt.grid(True, linestyle="--", alpha=0.5)
+        st.pyplot(fig)
+    else:
+        st.info("ℹ️ Data kepuasan pelanggan belum tersedia dari Google Form.")
+
 # === Load Data Awal ===
 data_tx = load_data_local()
 data_form = load_data_from_google()
@@ -109,25 +123,17 @@ if menu == "Pendapatan & Kepuasan Harian":
 
     if st.button("🔄 Refresh Data dari Google Form"):
         data_form = load_data_from_google()
-        if not data_form.empty:
-            st.success("✅ Data kepuasan berhasil diperbarui dari Google Form!")
-        else:
-            st.warning("⚠️ Tidak ada data baru dari Google Form.")
+        st.success("✅ Data kepuasan berhasil diperbarui dari Google Form.")
 
     # --- Grafik Pendapatan ---
-    if data_tx.empty:
-        st.warning("⚠️ Belum ada data transaksi kasir.")
-    else:
+    if not data_tx.empty:
         data_tx["harga"] = pd.to_numeric(data_tx["harga"], errors="coerce").fillna(0)
         pendapatan_harian = data_tx.groupby("tanggal")["harga"].sum().reset_index()
-
         st.write("### 💰 Tabel Pendapatan Harian")
         st.dataframe(pendapatan_harian)
-
         pdf_buffer = generate_pendapatan_pdf(pendapatan_harian)
         st.download_button("📄 Download PDF Laporan Pendapatan", data=pdf_buffer,
                            file_name="Laporan_Pendapatan_JackBarber.pdf", mime="application/pdf")
-
         fig, ax = plt.subplots(figsize=(10, 5))
         ax.plot(pendapatan_harian["tanggal"], pendapatan_harian["harga"], marker="o", color="blue")
         ax.set_title("Pendapatan Harian (Rp)")
@@ -138,34 +144,18 @@ if menu == "Pendapatan & Kepuasan Harian":
         plt.grid(True, linestyle="--", alpha=0.5)
         st.pyplot(fig)
 
-    # --- Grafik Kepuasan ---
-    if not data_form.empty:
-        data_form['tanggal'] = pd.to_datetime(data_form['tanggal'], errors='coerce')
-        kepuasan_harian = data_form.groupby('tanggal')['rating'].mean().reset_index()
-
-        st.write("### 😊 Grafik Kepuasan Pelanggan (Google Form)")
-        fig2, ax2 = plt.subplots(figsize=(10, 5))
-        ax2.plot(kepuasan_harian['tanggal'], kepuasan_harian['rating'], marker="s", color="green")
-        ax2.set_title("Rata-rata Kepuasan Pelanggan (1-5)")
-        ax2.set_xlabel("Tanggal Pengisian Form")
-        ax2.set_ylabel("Rating")
-        ax2.xaxis.set_major_formatter(mdates.DateFormatter('%d-%b'))
-        plt.xticks(rotation=45)
-        plt.grid(True, linestyle="--", alpha=0.5)
-        st.pyplot(fig2)
-    else:
-        st.info("ℹ️ Data kepuasan pelanggan belum tersedia dari Google Form.")
+    # --- Grafik Kepuasan otomatis ---
+    st.write("### 😊 Grafik Kepuasan Pelanggan")
+    plot_kepuasan(data_form)
 
     # --- Prediksi Pendapatan AI ---
-    if not data_tx.empty and len(data_tx) > 2:
-        st.write("### 🤖 Prediksi Pendapatan 7 Hari ke Depan (AI)")
+    if len(data_tx) > 2:
         df_pred = data_tx.groupby("tanggal")["harga"].sum().reset_index()
         df_pred.rename(columns={"tanggal": "ds", "harga": "y"}, inplace=True)
         model = Prophet(daily_seasonality=True)
         model.fit(df_pred)
         future = model.make_future_dataframe(periods=7)
         forecast = model.predict(future)
-
         fig3, ax3 = plt.subplots(figsize=(10, 5))
         ax3.plot(df_pred['ds'], df_pred['y'], label='Pendapatan Aktual', marker='o')
         ax3.plot(forecast['ds'], forecast['yhat'], label='Prediksi AI', linestyle='--', color='red')
@@ -178,7 +168,6 @@ if menu == "Pendapatan & Kepuasan Harian":
 # === 2. Input Transaksi Kasir (tanpa rating) ===
 elif menu == "Input Transaksi Kasir":
     st.title("💵 Input Transaksi Kasir")
-
     with st.form("form_transaksi"):
         nama = st.text_input("Nama Pelanggan")
         tanggal = st.date_input("Tanggal Transaksi")
@@ -186,7 +175,6 @@ elif menu == "Input Transaksi Kasir":
             "Pilih Layanan",
             ["Potong Rambut", "Cukur Jenggot", "Hair Spa", "Cat Rambut", "Creambath", "Paket Lengkap"]
         )
-
         harga_total = sum({
             "Potong Rambut": 20000,
             "Cukur Jenggot": 15000,
@@ -195,9 +183,7 @@ elif menu == "Input Transaksi Kasir":
             "Creambath": 25000,
             "Paket Lengkap": 80000
         }[l] for l in layanan)
-
         st.write(f"💰 Total Harga: Rp {harga_total:,.0f}")
-
         submitted = st.form_submit_button("💾 Simpan Transaksi")
 
     if submitted:
@@ -210,7 +196,11 @@ elif menu == "Input Transaksi Kasir":
             "layanan": ", ".join(layanan),
             "harga": harga_total
         }])
-
         transaksi = pd.concat([transaksi, new_data], ignore_index=True)
         transaksi.to_csv(LOCAL_TX_FILE, index=False)
-        st.success("✅ Transaksi berhasil disimpan tanpa rating (rating diambil dari Google Form).")
+        st.success("✅ Transaksi berhasil disimpan.")
+
+        # --- Update otomatis grafik kepuasan ---
+        data_form = load_data_from_google()
+        st.write("### 😊 Grafik Kepuasan Pelanggan Terbaru")
+        plot_kepuasan(data_form)
