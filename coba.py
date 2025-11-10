@@ -204,3 +204,4 @@ elif menu == "Input Transaksi Kasir":
         data_form = load_data_from_google()
         st.write("### 😊 Grafik Kepuasan Pelanggan Terbaru")
         plot_kepuasan(data_form)
+
